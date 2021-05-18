@@ -1,0 +1,98 @@
+## регистрация пользователя
+POST http://127.0.0.1:8000/api/v1/user/register
+Content-Type: application/json
+
+{
+    "first_name": "test_shop2",
+    "last_name": "last_shop2",
+    "email": "shop2@example.com",
+    "password": "12345shop",
+    "company": "test_shop2",
+    "position": "test_position2",
+    "type": "Магазин"
+}
+
+##### подтверждение регистрации
+POST http://127.0.0.1:8000/api/v1/user/register/confirm
+Content-Type: application/json
+
+{
+    "email": "shop2@example.com",
+    "token": "6b4187fc64fb45f704ca73653721e583c5cd0cb34982320bf"
+}
+
+#### login shop2
+POST http://127.0.0.1:8000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "shop2@example.com",
+    "password": "12345shop"
+}
+
+#### Загрузка yaml связной (shop1)
+POST http://127.0.0.1:8000/api/v1/partner/update
+Content-Type: application/json
+Authorization: Token 497f73948bd46ece875db092ebe3f2465ca72c77
+
+{
+    "url": "https://raw.githubusercontent.com/netology-code/python-final-diplom/master/data/shop1.yaml"
+}
+
+
+#### Загрузка yaml м-видео (shop2)
+POST http://127.0.0.1:8000/api/v1/partner/update
+Content-Type: application/json
+Authorization: Token f982b2cdea5ac12590a753a80c0f3f6217e1776b
+
+{
+    "url": "https://raw.githubusercontent.com/KleachiM/fgis/main/shop1.yml"
+}
+
+
+##### добавление в корзину для пользователя test_name1
+POST http://127.0.0.1:8000/api/v1/basket
+Content-Type: application/json
+Authorization: Token 91b20a93b261075540c7c5b2d61dd3f1063a4708
+
+{
+    "items": "[{\"id\": 421631, \"product_info\": 6, \"quantity\": 1}]"
+}
+
+##### получение содержимого корзины пользователя test_name1
+GET http://127.0.0.1:8000/api/v1/basket
+Content-Type: application/json
+Authorization: Token 91b20a93b261075540c7c5b2d61dd3f1063a4708
+
+
+#### добавление контактов пользователя test_name1
+POST http://127.0.0.1:8000/api/v1/user/contact
+Content-Type: application/json
+Authorization: Token 91b20a93b261075540c7c5b2d61dd3f1063a4708
+
+{
+    "city": "Miamy",
+    "street": "Lenin street",
+    "phone": "12345"
+}
+
+#### получение контактов пользователя test_name1
+GET http://127.0.0.1:8000/api/v1/user/contact
+Content-Type: application/json
+Authorization: Token 91b20a93b261075540c7c5b2d61dd3f1063a4708
+
+
+#### размещение заказов из корзины пользоватея test_name1
+POST http://127.0.0.1:8000/api/v1/order
+Content-Type: application/json
+Authorization: Token 91b20a93b261075540c7c5b2d61dd3f1063a4708
+
+{
+    "id": 1,
+    "contact": 1
+}
+
+#### получение заказов из корзины пользоватея test_name1
+GET http://127.0.0.1:8000/api/v1/order
+Content-Type: application/json
+Authorization: Token 91b20a93b261075540c7c5b2d61dd3f1063a4708
